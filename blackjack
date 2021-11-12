@@ -1,0 +1,156 @@
+ClrHome
+Disp "OPENING DECK...
+ClrList ⌊CARDS
+52→dim(⌊CARDS
+For(Y,2,11
+For(Z,1,4
+Lbl 1
+randInt(1,52)→X
+If ⌊CARDS(X)≠0
+Goto 1
+Y→⌊CARDS(X)
+End
+End
+For(X,1,52
+If ⌊CARDS(X)=0
+10→⌊CARDS(X)
+End
+0→L
+0→W
+Lbl 8
+1→C
+0→A
+0→B
+0→P
+0→S
+2→N
+2→G
+ClrHome
+Disp "SHUFFLING...
+For(Y,1,2
+For(X,1,52
+⌊CARDS(X)→T
+randInt(1,52)→Z
+⌊CARDS(Z)→U
+U→⌊CARDS(X
+T→⌊CARDS(Z
+End
+End
+ClrHome
+Lbl 10
+2→G
+2→N
+0→T
+0→A
+0→B
+0→S
+Repeat T=150
+T+1→T
+End
+ClrHome
+W-L→M
+Output(5,1,M
+If C>40
+Goto 8
+⌊CARDS(C)+⌊CARDS(C+1)→A
+Output(7,7,"[]
+Output(7,9,"[]
+⌊CARDS(C+2)→D
+⌊CARDS(C+2)+⌊CARDS(C+3)→B
+Output(2,7,"[]
+Output(2,9,"[]
+C+4→C
+If D>9
+Output(1,7,D
+If D<10
+Output(1,8,D
+Output(1,9,"?
+If ⌊CARDS(C-4)=11
+Then
+A-11→A
+P+1→P
+End
+If ⌊CARDS(C-3)=11
+Then
+A-11→A
+P+1→P
+End
+Output(8,8,A
+While P>0
+Output(8,1,A+1
+Output(8,3,"?
+Output(8,14,A+11
+Output(8,16,"?
+Repeat S=11 or S=15
+getKey→S
+End
+If S=11
+A+1→A
+If S=15
+A+11→A
+P-1→P
+0→S
+Output(8,1,"   "
+Output(8,14,"   "
+Output(8,8,A
+End
+Lbl 5
+Output(8,13,"HIT?"
+Output(8,1,"STAY?
+Repeat S=11 or S=15
+getKey→S
+End
+If S=11
+Then
+While B<17
+⌊CARDS(C)+B→B
+C+1→C
+Output(2,7+(G*2),"[]
+End
+
+Output(1,7," "
+Output(1,8,B
+If B>21
+Then
+Output(2,7,"          "
+Output(2,7,"BUST
+Output(5,6,"WINNER
+W+1→W
+Goto 10
+End
+If A>B
+Then
+Output(5,6,"WINNER
+W+1→W
+Goto 10
+End
+If A=B
+Goto 10
+If A<B
+Then
+Output(5,7,"LOSE
+Output(1,7," "
+Output(1,8,B
+L+1→L
+Goto 10
+End
+End
+If S=15
+Then
+⌊CARDS(C)+A→A
+N+1→N
+Output(7,5+(N*2),"[]
+C+1→C
+Output(8,8,A
+If A>21
+Then
+Output(7,7,"          "
+Output(7,7,"BUST
+Output(5,7,"LOSE
+L+1→L
+Output(1,7," "
+Output(1,8,B
+Goto 10
+End
+End
+Goto 5
